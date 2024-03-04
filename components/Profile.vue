@@ -11,13 +11,9 @@
                 </div>
                 <div class="mt-2 flex">
                     <!-- <a href="" class="bg-[#f0f2ef] rounded text-base text-center p-2 inline-block">Share Profile</a> -->
-                    <div class="mr-2">
-                        <SocialShare network="facebook" />
+                    <div class="mr-2" v-for="s in ['facebook', 'twitter', 'linkedin']">
+                        <SocialShare :network="s" />
                     </div>
-                    <div class="mr-3">
-                        <SocialShare network="twitter" />
-                    </div>
-                    <SocialShare network="linkedin" />
                 </div>
             </div>
         </div>
