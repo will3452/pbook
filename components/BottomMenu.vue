@@ -1,0 +1,7 @@
+<template>
+    <div class="md:hidden block fixed w-full bottom-0 bg-[#f0f2ef] flex py-4 justify-between px-8">
+        <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" @click.prevent="navigateTo('/')" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 0 0-2 2v3a2 2 0 1 1 0 4v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3a2 2 0 1 1 0-4V7a2 2 0 0 0-2-2z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" @click.prevent="navigateTo('/')" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m3 12l2-2m0 0l7-7l7 7M5 10v10a1 1 0 0 0 1 1h3m10-11l2 2m-2-2v10a1 1 0 0 1-1 1h-3m-6 0a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1m-6 0h6"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" @click.prevent="navigateTo('/')" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 1 1-8 0a4 4 0 0 1 8 0m-4 7a7 7 0 0 0-7 7h14a7 7 0 0 0-7-7"/></svg>
+    </div>
+</template>
