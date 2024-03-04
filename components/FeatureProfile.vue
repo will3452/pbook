@@ -11,7 +11,7 @@
             </div>
         </div>
         <div>
-            <a href="" @click.prevent="navigateTo('/profile/1')" class="">Visit Profile</a>
+            <a href="" @click.prevent="navigateTo('/profile/1')" class="bg-[#f0f2ef] rounded p-2">Visit Profile</a>
         </div>
     </div>
 </template>
