@@ -5,7 +5,6 @@
         </h1>
         <FeatureProfile v-for="profile in profiles" :key="profile.id"/>
     </div>
-    {{ profiles }}
 </template>
 
 <script setup>
