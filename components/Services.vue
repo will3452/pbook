@@ -1,30 +1,17 @@
 <script setup>
-    const services = [
-        {
-            id: 1, 
-            name: 'Portrait', 
-            image: 'https://picsum.photos/seed/portrait/300/200',
-            description: 'Capturing the essence and personality of individuals or groups.'
-        },
-        {
-            id: 5, 
-            name: 'Event', 
-            image: 'https://picsum.photos/seed/event/300/200',
-            description: 'Capturing the dynamic moments of various occasions and gatherings. '
-        },
-        {
-            id: 4, 
-            name: 'Commercial', 
-            image: 'https://picsum.photos/seed/products/300/200',
-            description: 'Creating images for business and marketing purposes.'
-        },
-        {
-            id: 3,
-            name: 'Real Estate',
-            image: 'https://picsum.photos/seed/real-estate/300/200',
-            description: 'Capturing properties in the most visually appealing way to attract potential buyers or renters.', 
-        },
-    ]; 
+    import useApi from '~/composables/useApi'; 
+    const sb = useApi()
+
+    const services = ref([])
+
+    async function getServices() {
+        const { data } = await sb.from('services').select()
+        services.value = data;
+    }
+
+    onMounted(() => {
+        getServices()
+    })
 </script>
 <template>
     

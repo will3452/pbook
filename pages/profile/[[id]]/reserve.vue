@@ -8,7 +8,10 @@
             <ProfileServiceItem :service="service"/>
             <input type="date" class="p-2 rounded border mt-4 w-full">
         </div>
-        <div class="mt-4 w-full p-4 bg bg-[#f0f2ef] text-center rounded-md font-bold text-gray-500">
+        <div class="italic font-thin my-4">
+            Our system will email you once your booking's approved.
+        </div>
+        <div class="mt-4 w-full p-4 bg bg-[#f0f2ef] text-center rounded-md font-bold">
             <button>SUBMIT</button>
         </div>
     </div>
