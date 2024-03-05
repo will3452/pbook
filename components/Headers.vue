@@ -4,7 +4,6 @@ const { data } = await useFetch('/api/auth/session')
 </script>
 
 <template>
-    {{  data  }}
     <div class="flex bg-[#f0f2ef] items-center px-2 py-4 ">
         <div class="md:max-w-[800px] md:mx-auto flex justify-between items-center w-full">
             <img src="/ologo.png" class="w-32 h-16 object-cover" alt="">
