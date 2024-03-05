@@ -1,23 +1,31 @@
 <script setup>
 const showMenu = ref(false)
+const { data } = await useFetch('/api/auth/session')
 </script>
 
 <template>
+    {{  data  }}
     <div class="flex bg-[#f0f2ef] items-center px-2 py-4 ">
         <div class="md:max-w-[800px] md:mx-auto flex justify-between items-center w-full">
             <img src="/ologo.png" class="w-32 h-16 object-cover" alt="">
             <div class="hidden md:block font-serif">
-                <a href="javascript:;" @click.prevent="navigateTo('/')" class="ml-4">
+                <a href="javascript:;" @click.prevent="navigateTo('/')" :class="{ 'underline': $route.path == '/'}" class="ml-4">
                     Home
                 </a>
-                <a href="javascript:;" @click.prevent="navigateTo('/photographers')" class="ml-4">
+                <a href="javascript:;" @click.prevent="navigateTo('/photographers')" :class="{ 'underline': $route.path == '/photographers'}" class="ml-4">
                     Photographers
                 </a>
-                <a href="javascript:;" @click.prevent="navigateTo('/')" class="ml-4">
+                <a href="javascript:;" @click.prevent="navigateTo('/')" :class="{ 'underline': $route.path == '/bookings'}" class="ml-4">
                     My Bookings
                 </a>
-                <a href="javascript:;" @click.prevent="navigateTo('/')" class="ml-4">
+                <a href="javascript:;" @click.prevent="navigateTo('/')" :class="{ 'underline': $route.path == '/about'}" class="ml-4">
                     About Us
+                </a>
+                <a href="javascript:;" @click.prevent="navigateTo('/login')" :class="{ 'underline': $route.path == '/login'}" class="ml-4">
+                    Login
+                </a>
+                <a href="javascript:;" @click.prevent="navigateTo('/')" :class="{ 'underline': $route.path == '/register'}" class="ml-4">
+                    Register
                 </a>
             </div>
             <svg @click="showMenu = !showMenu" class="md:hidden block cursor-pointer" v-if="!showMenu"

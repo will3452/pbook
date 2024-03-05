@@ -1,13 +1,19 @@
+
+<script setup>
+    import ProfileServices from '~/components/ProfileServices.vue';
+    const route = useRoute()
+    const { data } = await useFetch(`/api/photographers/${route.params.id}`)
+</script>
 <template>
-    <Profile />
+    <Profile :data="data" />
     <div class="mx-2 font-serif md:max-w-[800px] md:mx-auto">
-        <h1 class="text-base border-l-8  pl-4 mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia, nisi. Mollitia, pariatur nesciunt. Illo numquam excepturi quia ullam tempora! Ratione?</h1>
+        <h1 class="text-base border-l-8  pl-4 mb-2">{{ data.bio || 'No Bio Found.' }}</h1>
         <h1 class="text-2xl mb-2 font-serif">
-            Ruben's Services
+            {{data.first_name}}'s Services
         </h1>
-        <ProfileServices :services="services"/>
+        <ProfileServices :services="data.photographer_services"/>
         <h1 class="text-2xl mb-2 font-serif">
-            Ruben's Works
+            {{data.first_name}}'s Works
         </h1>
         <ProfileWorks />
         <h1 class="text-2xl mb-2 font-serif">
@@ -17,31 +23,3 @@
     </div>
     
 </template>
-
-<script setup>
-import ProfileServices from '~/components/ProfileServices.vue';
-
-    const services = [
-        {
-            name: 'Wedding',
-            price: '₱15,000.00',
-            category: 'event', 
-            inclusions: ['Free Mugs', 'T-Shirt Print'], 
-            schedules: ['Mon, Tue, Wed'], 
-        }, 
-        {
-            name: 'Birthday',
-            price: '₱10,000.00',
-            category: 'event', 
-            inclusions: ['Photo booth', ], 
-            schedules: ['Mon, Tue, Wed'], 
-        }, 
-        {
-            name: 'Others',
-            price: '₱14,000.00',
-            category: 'event', 
-            inclusions: ['Photo booth', 'Free Mugs', 'T-Shirt Print'], 
-            schedules: ['Mon, Tue'], 
-        }, 
-    ];
-</script>
