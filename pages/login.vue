@@ -3,13 +3,14 @@
         email: '',
         password:''
     }) 
+    const { signIn } = useAuth(); 
     async function onLogin () {
-        let data = await $fetch('/api/auth/login', {method: 'POST', body: credentials.value});
-        if (! data.user) {
-            alert('No user found!')
-            return; 
+        try {
+            await signIn(credentials.value, { callbackUrl: '/'}); 
+        } catch (error) {
+            console.log(error)
+            alert('User not found.')
         }
-        navigateTo('/'); 
     }
 </script>
 <template>
@@ -22,7 +23,7 @@
             <div class="mt-4">
                 Password
             </div>
-            <input type="password" v-model="credentials.password" class="border-2  w-full block px-2 p-1" placeholder="Enter email address.">
+            <input type="password" v-model="credentials.password" class="border-2  w-full block px-2 p-1" placeholder="Enter password.">
             <button type="submit" class="mt-4 bg-[#f0f2ef] p-2 px-4 rounded">
                 Login
             </button>

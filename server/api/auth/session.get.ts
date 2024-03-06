@@ -1,8 +1,11 @@
-import useDatabase from "~/composables/useDatabase";
+import jwt from 'jsonwebtoken';
 
-const client = useDatabase()
 export default defineEventHandler(async (event) => {
-    const data = await client.auth.getUser(); 
-    console.log('data >> ', data)
-    return data; 
+    try {
+        let token = event.headers.get('Authorization')?.split(' ')[1];
+        const data = jwt.verify(token, 's3cr3t'); 
+        return data; 
+    } catch (error) {
+        console.log('session.error', error)
+    }
 })

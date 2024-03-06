@@ -3,6 +3,10 @@
     import ProfileServices from '~/components/ProfileServices.vue';
     const route = useRoute()
     const { data } = await useFetch(`/api/photographers/${route.params.id}`)
+    
+    definePageMeta({
+        auth: false, 
+    })
 </script>
 <template>
     <Profile :data="data" />
