@@ -6,6 +6,6 @@ export default defineEventHandler(async (event) => {
     const file = formData.get('file');
     const { data } = await client.storage.from(`pbook`).upload(`users/${user_id}`, file, { upsert: true}); 
     let { data:image } = await client.storage.from('pbook').getPublicUrl(data.path); 
-    let response = await client.from('users').update({image: image.publicUrl, }).eq('id', user_id); 
+    let response = await client.from('users').update({image: `${image.publicUrl}?v=${Date.now()}`, }).eq('id', user_id); 
     return response; 
 }); 

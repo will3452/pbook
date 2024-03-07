@@ -25,6 +25,7 @@
         let resp = await $fetch('/api/upload-profile', { body: fd, method: 'POST'})
         console.log(resp); 
         uploading.value = false; 
+        getSession()
         alert('Image has been uploaded, please refresh your page or press CTRL + SHIFT + R'); 
     }
 </script>
@@ -35,7 +36,7 @@
         </h1>
         <span>{{ uploading ? 'Uploading ...' : '' }}</span>
         <div class="md:flex w-full mt-2">
-            <img @mouseover="showUpdate = true" v-if="! showUpdate" class="md:w-32 md:h-32 w-1/2 mx-auto md:ml-0 md:mr-2 rounded-md" :src="data.data.image ? data.data.image : `https://ui-avatars.com/api/?name=${data.data.name}`"/>
+            <img @mouseover="showUpdate = true" v-if="! showUpdate" class="object-fit md:w-32 md:h-32 w-1/2 mx-auto md:ml-0 md:mr-2 rounded-md" :src="data.data.image ? data.data.image : `https://ui-avatars.com/api/?name=${data.data.name}`"/>
             <div @click="upload.click()" v-if="showUpdate" @mouseleave="showUpdate = false" class="flex items-center justify-center bg-[#f0f2ef] cursor-pointer md:w-32 md:h-32 w-64 h-64 mx-auto md:ml-0 md:mr-2 rounded-md">
                 <span>{{ uploading ? 'Uploading ...' : 'Upload' }}</span>
             </div>
