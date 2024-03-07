@@ -3,16 +3,17 @@
         email: '',
         password:''
     }) 
+
     const { signUp } = useAuth(); 
     async function onRegister () {
         try {
             const data = await signUp(credentials.value, { callbackUrl: '/' });
-            console.log('data -> ', data) 
         } catch (error) {
             console.log(error)
             alert('User not found.')
         }
     }
+
     definePageMeta({
         auth: {
             unauthenticatedOnly: true,

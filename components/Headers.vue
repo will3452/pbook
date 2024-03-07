@@ -24,8 +24,8 @@ const { data, status, signOut } = useAuth()
                     <a href="javascript:;" @click.prevent="signOut({callbackUrl: '/login'})" :class="{ 'underline': $route.path == '/about'}" class="ml-4">
                         Logout
                     </a>
-                    <a href="javascript:;":class="{ 'underline': $route.path == '/about'}" class="ml-4">
-                        <img :src="`https://ui-avatars.com/api/?name=${data.data.name}`" alt="" class="h-[32px] w-[32px]  inline-block rounded-full">
+                    <a href="javascript:;" @click.prevent="navigateTo('/my-profile')" :class="{ 'underline': $route.path == '/my-profile'}" class="ml-4">
+                        <img :src="data.data.image ? data.data.image : `https://ui-avatars.com/api/?name=${data.data.name}`" alt="" class="h-[32px] w-[32px]  inline-block rounded">
                     </a>
                 </template>
                 <template v-if="status != 'authenticated'">
@@ -58,6 +58,7 @@ const { data, status, signOut } = useAuth()
         <a href="#" @click.prevent="navigateTo('/my-bookings')" class="block p-2 text-xl font-serif text-center hover:underline">My Bookings</a>
         <a href="#" class="block p-2 text-xl font-serif text-center hover:underline">About us</a>
         <template v-if="status == 'authenticated'">
+            <a href="#" @click.prevent="navigateTo('/my-profile')"  class="block p-2 text-xl font-serif text-center hover:underline">My Profile</a>
             <a href="#" @click.prevent="signOut({callbackUrl: '/login'})"  class="block p-2 text-xl font-serif text-center hover:underline">Logout</a>
         </template>
         <template v-if="status != 'authenticated'">
