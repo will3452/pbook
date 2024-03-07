@@ -7,7 +7,7 @@
             <img class="w-16 h-16 rounded" :src="data.photographers.image ? data.photographers.image : `https://ui-avatars.com/api/?name=${data.photographers.first_name}+${data.photographers.last_name}`" alt="">
             <div  class="ml-2">
                 <h1>Reference: {{ data.reference}}</h1>
-                <h2 class="text-sm">Name: {{ data.photographers.first_name}} {{  data.photographers.last_name }}, Email: {{ data.photographers.email }} </h2>
+                <h2 class="text-xs">Name: {{ data.photographers.first_name}} {{  data.photographers.last_name }}, Email: {{ data.photographers.email }} </h2>
                 <div>
                     Service Category: {{  data.services.name  }}, Scheduled Date: {{ data.booked_date}}
                 </div>

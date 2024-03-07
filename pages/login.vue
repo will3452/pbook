@@ -1,4 +1,17 @@
 <script setup>
+    import { useReCaptcha } from 'vue-recaptcha-v3';
+    const recaptchaInstance = useReCaptcha();
+
+    const recaptcha = async () => {
+        // optional you can await for the reCaptcha load
+        await recaptchaInstance?.recaptchaLoaded();
+
+        // get the token, a custom action could be added as argument to the method
+        const token = await recaptchaInstance?.executeRecaptcha('yourActionHere');
+
+        return token;
+    };
+
     const credentials = ref({
         email: '',
         password:''
@@ -6,6 +19,7 @@
     const { signIn } = useAuth(); 
     async function onLogin () {
         try {
+            const token = await recaptcha();
             await signIn(credentials.value, { callbackUrl: '/'}); 
         } catch (error) {
             console.log(error)
