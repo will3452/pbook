@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
         .from('photographers')
         .select()
         .ilike('first_name', `%${search}%`)
-        .eq('is_approved', true)
+        .eq('is_approved', false)
         .limit(limit); 
 
     return data; 
