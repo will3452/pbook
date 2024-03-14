@@ -1,6 +1,19 @@
 <script setup>
 const showMenu = ref(false)
 const { data, status, signOut } = useAuth()
+
+const menus = ref([{path:'/', name: 'Home'},])
+
+useAsyncData(() => {
+    if (data.value.data.type == 'CLIENT') {
+        menus.value.push({path: '/photographers', name: 'Photographers'})
+        menus.value.push({path: '/my-bookings', name: 'My Bookings'})
+    } else if (data.value.data.type == 'PHOTOGRAPHER') {
+        menus.value.push({path: '/my-request-bookings', name: 'My Booking Request', count: 2})
+        menus.value.push({path: '/my-portfolio', name: 'My Portfolio'})
+    }
+})
+
 </script>
 
 <template>
@@ -8,17 +21,8 @@ const { data, status, signOut } = useAuth()
         <div class="md:max-w-[800px] md:mx-auto flex justify-between items-center w-full">
             <img src="/ologo.png" class="w-32 h-16 object-cover" alt="">
             <div class="hidden md:block font-serif">
-                <a href="javascript:;" @click.prevent="navigateTo('/')" :class="{ 'underline': $route.path == '/'}" class="ml-4">
-                    Home
-                </a>
-                <a href="javascript:;" @click.prevent="navigateTo('/photographers')" :class="{ 'underline': $route.path == '/photographers'}" class="ml-4">
-                    Photographers
-                </a>
-                <a href="javascript:;" @click.prevent="navigateTo('/my-bookings')" :class="{ 'underline': $route.path == '/my-bookings'}" class="ml-4">
-                    My Bookings
-                </a>
-                <a href="javascript:;" @click.prevent="navigateTo('/')" :class="{ 'underline': $route.path == '/about'}" class="ml-4">
-                    About Us
+                <a href="javascript:;" v-for="i in menus" @click.prevent="navigateTo(i.path)" :class="{ 'underline': $route.path == i.path}" class="ml-4">
+                    {{ i.name }} <span class="text-xs" v-if="i.count">({{ i.count }})</span>
                 </a>
                 <template v-if="status == 'authenticated'">
                     <a href="javascript:;" @click.prevent="signOut({callbackUrl: '/login'})" :class="{ 'underline': $route.path == '/about'}" class="ml-4">
@@ -51,12 +55,8 @@ const { data, status, signOut } = useAuth()
 
     </div>
     <div v-if="showMenu">
-        <a href="javascript:;" @click.prevent="navigateTo('/'); showMenu = false"
-            class="block p-2 text-xl font-serif text-center hover:underline">Home</a>
-        <a href="#" @click.prevent="navigateTo('/photographers'); showMenu = false"
-            class="block p-2 text-xl font-serif text-center hover:underline">Photographers</a>
-        <a href="#" @click.prevent="navigateTo('/my-bookings')" class="block p-2 text-xl font-serif text-center hover:underline">My Bookings</a>
-        <a href="#" class="block p-2 text-xl font-serif text-center hover:underline">About us</a>
+        <a href="javascript:;" v-for="i in menus" :key="i.path" @click.prevent="navigateTo(i.path); showMenu = false"
+            class="block p-2 text-xl font-serif text-center hover:underline">{{i.name}}</a>
         <template v-if="status == 'authenticated'">
             <a href="#" @click.prevent="navigateTo('/my-profile')"  class="block p-2 text-xl font-serif text-center hover:underline">My Profile</a>
             <a href="#" @click.prevent="signOut({callbackUrl: '/login'})"  class="block p-2 text-xl font-serif text-center hover:underline">Logout</a>
