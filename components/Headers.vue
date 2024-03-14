@@ -11,6 +11,8 @@ useAsyncData(() => {
     } else if (data.value.data.type == 'PHOTOGRAPHER') {
         menus.value.push({path: '/my-request-bookings', name: 'My Booking Request', count: 2})
         menus.value.push({path: '/my-portfolio', name: 'My Portfolio'})
+    } else if (data.value.data.type == 'ADMINISTRATOR') {
+        menus.value.push({path: '/photographers', name: 'Photographers'})
     }
 })
 
