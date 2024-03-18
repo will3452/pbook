@@ -8,7 +8,7 @@
     })
 </script>
 <template>
-    <div class="md:max-w-[800px] md:mx-auto px-2">
+    <div class="md:max-w-[900px] md:mx-auto px-2">
         <BackButton/>
         <h1 class="text-2xl mb-2 font-serif mt-4 mb-2 border-b-2 pb-4 border-dashed">
             Booking Form

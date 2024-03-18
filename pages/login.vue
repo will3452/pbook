@@ -28,7 +28,7 @@
     }
 </script>
 <template>
-    <div class="md:max-w-[800px] md:mx-auto flex font-serif justify-between items-center w-full">
+    <div class="md:max-w-[900px] md:mx-auto flex font-serif justify-between items-center w-full">
         <form @submit.prevent="onLogin" class="w-full my-4 px-4">
             <div>
                 Email

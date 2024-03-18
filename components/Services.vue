@@ -2,7 +2,7 @@
     const { data, pending } = await useFetch('/api/services')
 </script>
 <template>
-    <div class="mx-2 mb-2 md:max-w-[800px] mx-auto">
+    <div class="mx-2 mb-2 md:max-w-[900px] mx-auto">
         <h1 class="text-xl font-serif md:text-center">
                 Our Services
         </h1>

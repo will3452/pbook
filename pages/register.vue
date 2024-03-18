@@ -22,7 +22,7 @@
     })
 </script>
 <template>
-    <div class="md:max-w-[800px] md:mx-auto flex font-serif justify-between items-center w-full">
+    <div class="md:max-w-[900px] md:mx-auto flex font-serif justify-between items-center w-full">
         <form @submit.prevent="onRegister" class="w-full my-4 px-4">
             <div  class="mt-4">
                 Register as:
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div  class="mt-4">
-                Full Name
+                Full Name (Last Name FirstName Middle Name)
             </div>
             <input type="text" v-model="credentials.name" class="border-2  w-full block px-2 p-1" placeholder="Enter Full Name.">
             <div class="mt-4">

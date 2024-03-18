@@ -1,6 +1,8 @@
 <script setup>
 
     const addNewService = ref(false)
+    const editService = ref(false); 
+    const selectedService = ref({}); 
     const { data:userData } = useAuth()
     const { data:services, refresh:refreshService } = await useFetch('/api/services', { query: { limit: 99} })
     const newService = ref({
@@ -31,9 +33,39 @@
             newService.value = {schedules: []}
         }
     }
+
+    async function remove(service_id) {
+        try {
+            await $fetch('/api/services', { method: 'DELETE', body: {
+                service_id, 
+            }})
+            alert('Service has been removed!'); 
+            await loadMyServices()
+        } catch (error) {
+            alert('Error, Please contact administrator!')
+        }
+    }
+
+    function update(service) {
+        editService.value = true; 
+        selectedService.value = service; 
+    }
+
+    async function save() {
+        try {
+            console.log('selectedService ', selectedService.value)
+            await $fetch('/api/services', {method: 'PUT', body: selectedService.value})
+            alert('Service has been updated!'); 
+            await loadMyServices()
+        } catch (error) {
+
+        } finally {
+            editService.value = false; 
+        }
+    }
 </script>
 <template>
-    <div class="mx-2 font-serif mt-2 md:max-w-[800px] md:mx-auto px-2">
+    <div class="mx-2 font-serif mt-2 md:max-w-[900px] md:mx-auto px-2">
         <h1 class="text-2xl mb-2 font-serif">
             My Portfolio
         </h1>
@@ -76,26 +108,63 @@
                     <th>Service</th>
                     <th>Fee</th>
                     <th>Schedule</th>
+                    <th>Inclusions</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="service in myServices" :key="service.id">
-                    <td class="border text-center">
-                        {{ service.services.name }}
+                    <td class="border text-center p-4">
+                        <template  v-if="editService && selectedService.id == service.id">
+                            <select name="" id="" class="border p-2 w-full mb-2" v-model="selectedService.service_id">
+                                <option :value="service.id" v-for="service in services" :key="service.id">
+                                    {{ service.name }} - {{ service.description }}
+                                </option>
+                            </select>
+                        </template>
+                        <div v-else>
+                            {{ service.services.name }}
+                        </div>
                     </td>
-                    <td class="border text-center">
-                        {{ service.fee }}
+                    <td class="border text-center p-4">
+                        <template  v-if="editService && selectedService.id == service.id">
+                            <input type="number" v-model="selectedService.fee" class="border p-2 w-full  mb-2">
+                        </template>
+                        <div v-else>
+                            {{ service.fee }}
+                        </div>
                     </td>
-                    <td class="border text-center">
-                        {{ service.schedules.join(', ') }}
+                    <td class="border text-center p-4">
+                        <template v-if="editService && selectedService.id == service.id">
+                            <div class="">
+                                <label :for="i" v-for="i in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']" class="flex items-center mr-2">
+                                    <input v-model="selectedService.schedules" type="checkbox" :value="i" :id="i" class="mr-2"> {{i}}
+                                </label>
+                            </div>
+                        </template>
+                        <div v-else>
+                            {{ (service.schedules || []).join(', ') }}
+                        </div>
+                    </td>
+                    <td class="border text-center p-4">
+                        <template v-if="editService && selectedService.id == service.id">
+                            <input type="text" v-model="selectedService.inclusions" class="border p-2 w-full  mb-2">
+                        </template>
+                        <div v-else>
+                            {{ (Array.isArray(service.inclusions) ? service.inclusions: [service.inclusions]).join(', ') }}
+                        </div>
                     </td>
                     <td class="border p-2 text-center">
-                        <a class="bg-[#f0f2ef] rounded p-2 mr-2">Edit</a>
-                        <a class="bg-[#f0f2ef] rounded p-2 mr-2">Remove</a>
+                        <button class="bg-[#f0f2ef] rounded p-2 m-2" @click="save" v-if="selectedService.id == service.id && editService">Save</button>
+                        <button class="bg-[#f0f2ef] rounded p-2 m-2" @click="update(service)" v-else>Edit</button>
+                        <button class="bg-[#f0f2ef] rounded p-2 m-2" @click="remove(service.id)">Remove</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="flex justify-between mb-2 mt-4">
+            <h1>My Works</h1>
+            <button class="underline">Add works</button>
+        </div>
     </div>
 </template>

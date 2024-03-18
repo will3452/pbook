@@ -5,7 +5,7 @@
     const { data } = await useFetch(`/api/bookings/my`, { query: { limit, search, user_id: user.value.data.id }});
 </script>
 <template>
-    <div class="mx-2 font-serif mt-2 md:max-w-[800px] md:mx-auto">
+    <div class="mx-2 font-serif mt-2 md:max-w-[900px] md:mx-auto">
         <h1 class="text-2xl mb-2 font-serif">
             Search Bookings
         </h1>

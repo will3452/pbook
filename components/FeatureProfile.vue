@@ -2,7 +2,7 @@
     const { data } = defineProps(['data'])
 </script>
 <template>
-    <div class="flex m-2 p-2 font-serif items-center justify-between md:max-w-[800px] md:mx-auto">
+    <div class="flex m-2 p-2 font-serif items-center justify-between md:max-w-[900px] md:mx-auto">
         <div class="flex">
             <img class="w-16 h-16 rounded" :src="data.image ? data.image : `https://ui-avatars.com/api/?name=${data.first_name}+${data.last_name}`" alt="">
             <div  class="ml-2">

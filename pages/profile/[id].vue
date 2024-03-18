@@ -10,7 +10,7 @@
 </script>
 <template>
     <Profile :data="data" />
-    <div class="mx-2 font-serif md:max-w-[800px] md:mx-auto">
+    <div class="mx-2 font-serif md:max-w-[900px] md:mx-auto">
         <h1 class="text-base border-l-8  pl-4 mb-2">{{ data.bio || 'No Bio Found.' }}</h1>
         <h1 class="text-2xl mb-2 font-serif">
             {{data.first_name}}'s Services

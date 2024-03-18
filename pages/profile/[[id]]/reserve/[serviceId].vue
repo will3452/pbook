@@ -15,9 +15,9 @@
             let _payload = {
                 user_id: userData.value.data.id, 
                 booked_date: payload.value.booked_date, 
-                service_id: route.params.serviceId, 
+                photographer_service_id: parseInt(route.params.serviceId), 
                 status: 'FOR CONFIRMATION',
-                photographer_id: route.params.id, 
+                photographer_id: parseInt(route.params.id), 
             }
 
             let data = await $fetch('/api/bookings', { body: _payload, method: 'POST'}); 
@@ -29,7 +29,7 @@
     }
 </script>
 <template>
-    <div class="md:max-w-[800px] md:mx-auto px-2 font-serif">
+    <div class="md:max-w-[900px] md:mx-auto px-2 font-serif">
         <BackButton/>
         <h1 class="text-2xl mb-2 font-serif mt-4 mb-2 border-b-2 pb-4 border-dashed">
             Booking Form

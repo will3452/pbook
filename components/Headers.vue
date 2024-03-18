@@ -2,25 +2,31 @@
 const showMenu = ref(false)
 const { data, status, signOut } = useAuth()
 
-const menus = ref([{path:'/', name: 'Home'},])
+const menus = computed(() => {
+    const _menu = [{path:'/', name: 'Home'},];
+    try {
+        if (data.value.data.type == 'CLIENT') {
+            _menu.push({path: '/photographers', name: 'Photographers'})
+            _menu.push({path: '/my-bookings', name: 'My Bookings'})
+        } else if (data.value.data.type == 'PHOTOGRAPHER') {
+            _menu.push({path: '/my-request-bookings', name: 'My Booking Request'})
+            _menu.push({path: '/my-portfolio', name: 'My Portfolio'})
+        } else if (data.value.data.type == 'ADMINISTRATOR') {
+            _menu.push({path: '/photographers', name: 'Photographers'})
+        }
 
-useAsyncData(() => {
-    if (data.value.data.type == 'CLIENT') {
-        menus.value.push({path: '/photographers', name: 'Photographers'})
-        menus.value.push({path: '/my-bookings', name: 'My Bookings'})
-    } else if (data.value.data.type == 'PHOTOGRAPHER') {
-        menus.value.push({path: '/my-request-bookings', name: 'My Booking Request', count: 2})
-        menus.value.push({path: '/my-portfolio', name: 'My Portfolio'})
-    } else if (data.value.data.type == 'ADMINISTRATOR') {
-        menus.value.push({path: '/photographers', name: 'Photographers'})
+        return _menu; 
+    } catch (error) {
+        return _menu; 
     }
 })
+
 
 </script>
 
 <template>
     <div class="flex bg-[#f0f2ef] items-center px-2 py-4 ">
-        <div class="md:max-w-[800px] md:mx-auto flex justify-between items-center w-full">
+        <div class="md:max-w-[900px] md:mx-auto flex justify-between items-center w-full">
             <img src="/ologo.png" class="w-32 h-16 object-cover" alt="">
             <div class="hidden md:block font-serif">
                 <a href="javascript:;" v-for="i in menus" @click.prevent="navigateTo(i.path)" :class="{ 'underline': $route.path == i.path}" class="ml-4">
