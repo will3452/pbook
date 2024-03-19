@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
+    "@uppy/vue": "^1.1.2",
     "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",
     "nuxt": "^3.10.3",
     "pinia": "^2.1.7",
+    "tus-js-client": "^4.1.0",
     "vue": "^3.4.19",
     "vue-recaptcha-v3": "^2.0.1",
     "vue-router": "^4.3.0"

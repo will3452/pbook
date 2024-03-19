@@ -1,17 +1,24 @@
-<template>
-    <div v-if="currentImage" class="w-screen h-screen flex justify-center items-center fixed top-0 left-0 bg-white">
-        <svg @click.prevent="currentImage = null" class="cursor-pointer absolute top-4 right-4" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="#888888" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-        <img :src="currentImage" alt="" class="w-full max-w-[400px]">
-    </div>
-    <div class="columns-2 md:columns-4 gap-1">
-        <img @click.prevent="viewImage(`https://picsum.photos/seed/${i}/${(Math.floor(Math.random() * 2) + 1) * 100}/100`)" :src="`https://picsum.photos/seed/${i}/${(Math.floor(Math.random() * 2) + 1) * 100}/100`" v-for="i in 8" class="w-full aspect-ratio p-2 rounded-xl object-cover" :key="i">
-    </div>
-
-</template>
-
 <script setup>
-    const currentImage = ref(null)
-    function viewImage(image) {
-        currentImage.value = image; 
+    const folders = ref([])
+    const { photographer_id } = defineProps(['photographer_id']) 
+
+    useAsyncData(async () => {
+        await loadFolders()
+    })
+
+    async function loadFolders () {
+        folders.value = await $fetch('/api/folders', { query: {
+            photographer_id: photographer_id, 
+        }})
     }
 </script>
+<template>
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-8 mt-4">
+            <div v-for="f in folders" :key="f.id" class="mx-2 cursor-pointer" @click="navigateTo('/works/' + f.id)">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-300 mx-auto" width="32" height="32" viewBox="0 0 512 512"><path fill="currentColor" d="M448 480H64c-35.3 0-64-28.7-64-64V192h512v224c0 35.3-28.7 64-64 64m64-320H0V96c0-35.3 28.7-64 64-64h128c20.1 0 39.1 9.5 51.2 25.6l19.2 25.6c6 8.1 15.5 12.8 25.6 12.8h160c35.3 0 64 28.7 64 64"/></svg>
+                <div class="text-center truncate">
+                    {{ f.name }}
+                </div>
+            </div>
+        </div>
+</template>

@@ -19,11 +19,12 @@
         <h1 class="text-2xl mb-2 font-serif">
             {{data.first_name}}'s Works
         </h1>
-        <ProfileWorks />
-        <h1 class="text-2xl mb-2 font-serif">
+        <ProfileWorks :photographer_id="data.id" />
+        <h1 class="text-2xl mb-2 font-serif mt-4">
             Customer Feedback
         </h1>
-        <ProfileFeedback />
+        
+        <ProfileFeedback :photographer_id="route.params.id"/>
     </div>
     
 </template>

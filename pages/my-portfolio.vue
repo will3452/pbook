@@ -2,7 +2,7 @@
 
     const addNewService = ref(false)
     const editService = ref(false); 
-    const selectedService = ref({}); 
+    const selectedService = ref({});
     const { data:userData } = useAuth()
     const { data:services, refresh:refreshService } = await useFetch('/api/services', { query: { limit: 99} })
     const newService = ref({
@@ -162,9 +162,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="flex justify-between mb-2 mt-4">
-            <h1>My Works</h1>
-            <button class="underline">Add works</button>
-        </div>
+        <h1>My Work(s)</h1>
+        <MyWorks />
     </div>
 </template>
